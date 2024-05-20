@@ -102,5 +102,18 @@ class LoginTest extends TestCase
 
     }
 
+    /**
+     * Test that only unauthenticated users can access the login page.
+     *
+     * @return void
+     */
+    public function test_only_unauthenticated_user_can_access_to_login_page(){
+
+        $john = User::factory()->create();
+
+        $this->actingAs($john)->get('/login')->assertRedirect(route('dashboard'));
+
+    }
+
 
 }
